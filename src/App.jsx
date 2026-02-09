@@ -32,6 +32,42 @@ import {
   Loader
 } from 'lucide-react';
 
+const QA_CHECKLIST_ROWS = [
+  { id: 'start', step: 'Start', desc: 'Debemos tener la solicitud SMV, la etiqueta de aprobación del estado del equipo, las instrucciones de embalaje, el patrón de paletización, el embalaje y el envío con SEeted, la lista de materiales (BOM). y el material de embalaje y la etiqueta reales', default: '' },
+  { id: 'check_bom', step: 'Check BOM', desc: 'BOM incluye packing BOM and Envio BOM .', default: 'OK' },
+  { id: 'bom_match', step: '', desc: 'Verifique que todo el material real y el software coincidan con la lista de materiales del embalaje.', default: 'OK' },
+  { id: 'envio_bom', step: '', desc: 'Envío BOM coincide con las compras en WI', default: 'OK' },
+  { id: 'safety_label', step: '', desc: 'Tenga en cuenta que toda la lista de materiales (BOM) tiene una etiqueta de seguridad.', default: 'OK' },
+  { id: 'seal_label', step: '', desc: 'Excepto en EE. UU., los demás productos tienen una etiqueta de sellado de la caja unitaria en la lista de materiales.', default: 'OK' },
+  { id: 'bom_qty', step: '', desc: 'Verifique la cantidad de la lista de materiales; todas las cantidades de material coinciden con una XCVR.', default: 'OK' },
+  { id: 'verify_wi_1', step: 'Verificar WI', desc: 'Verifique el embalaje/envío de WI sobre todos los números de pieza y etiquetas del material.', default: 'OK' },
+  { id: 'verify_wi_2', step: '', desc: 'En efecto, todo el proceso de embalaje debe realizarse de acuerdo con WI', default: 'OK' },
+  { id: 'verify_wi_3', step: '', desc: 'Verifique que el envío WI coincida con el patrón de la paleta.', default: 'OK' },
+  { id: 'verify_wi_4', step: '', desc: 'Verifique que el envío de WI se ajuste a las especificaciones del diseño de label.', default: 'OK' },
+  { id: 'verify_wi_5', step: '', desc: 'Verifique que el envío WI cumpla con la aprobación label', default: 'OK' },
+  { id: 'manual_1', step: 'Manual de usuario', desc: 'Inspección de accesorios: verifique que todos los materiales en la caja coincidan (puede incluir, entre otros, el embalaje, el teléfono, el cargador, las instrucciones y el cable, etc.). Compruebe el número de paquete, la cantidad y colóquelos en la posición correcta según los requisitos de WI. Asegúrese de que el embalaje esté completo y abierto.', default: 'OK' },
+  { id: 'manual_2', step: '', desc: 'El aspecto del manual es bueno, sin suciedad, sin daños, plegado, con una secuencia de sublimación correcta y cumple con los requisitos de WI.', default: 'OK' },
+  { id: 'weee', step: '', desc: 'En los productos enviados a Europa, la configuración incluida en la caja (cargador, cable de datos, cargador, etc.) debe estar en la etiqueta RAEE (contenedor)', default: 'OK' },
+  { id: 'colombia', step: '', desc: 'Enviado a Colombia, etiqueta de código de barras IMEI adicional en la caja de la unidad', default: 'NA' },
+  { id: 'power', step: '', desc: 'Adaptador de corriente del tipo correcto para el país correspondiente (el modelo para Hong Kong/Reino Unido debe tener 3 paletas, el modelo para otros países debe tener 2 paletas).', default: 'OK' },
+  { id: 'back_case', step: '', desc: 'La caja trasera con la impresión correcta para que coincida con las del teléfono. Menú y contenido del paquete', default: 'OK' },
+  { id: 'wl_look', step: 'Consulte el embalaje WL', desc: 'Revise los elementos a los que debe prestar especial atención (como envíos a diferentes países y regiones, marcas de certificación).', default: '' },
+  { id: 'elabel', step: '', desc: 'La información de la etiqueta electrónica debe coincidir con todos los valores de la etiqueta de la caja.', default: 'NA' },
+  { id: 'sar', step: '', desc: 'Verifique el valor SAR en el software del teléfono (etiqueta electrónica), el valor SAR en la etiqueta de la caja y el valor SAR en el manual. Todos estos valores SAR deben coincidir al 100%. Los productos de la misma producción deben tener los mismos valores SAR.', default: 'SAR Values : /' },
+  { id: 'verify_label', step: 'Verificar etiqueta', desc: 'Match toda la información de la etiqueta y la etiqueta de aprobación SMV', default: 'OK' },
+  { id: 'box_type', step: '', desc: 'Verifique el nombre del tipo caja unitaria', default: '' },
+  { id: 'tac_code_v', step: '', desc: 'Verifique el código TAC según la solicitud SMV en la etiqueta IMEI (Nota: los primeros 8 dígitos del número IMEI en la etiqueta IMEI del dispositivo y en la etiqueta de la caja de la unidad).', default: 'OK' },
+  { id: 'auth_no', step: '', desc: 'Confiem Authentication NO y etiqueta', default: '' },
+  { id: 'memory', step: '', desc: 'Comprobar el tamaño de la memoria coincida con la etiqueta', default: 'NA' },
+  { id: 'emea_uk', step: '', desc: 'EMEA-UK 02 debe tener el código SEU en la etiqueta de la unidad y la caja.', default: 'NA' },
+  { id: 'phone_info_1', step: 'Informacion del telefono', desc: 'Comprueba si el teléfono es de una o dos celdas.', default: 'UNA' },
+  { id: 'phone_info_2', step: '', desc: 'Comprueba el teléfono con la tarjeta SIM, ¿no?', default: 'OK' },
+  { id: 'phone_info_3', step: '', desc: 'Comprueba si el teléfono tiene grabados láser, verifica el contenido y la dirección.', default: 'NA' },
+  { id: 'acc_1', step: 'Accesorios', desc: 'Compruebe la función bluetooth y el Bluetooth incluidos en la caja.', default: 'OK' },
+  { id: 'acc_2', step: '', desc: 'Comprueba el funcionamiento de los auriculares con el teléfono y los auriculares incluidos en la caja.', default: 'NA' },
+  { id: 'acc_3', step: '', desc: 'Comprueba el funcionamiento del cargador con el teléfono', default: 'OK' }
+];
+
 export default function App() {
   // Estado para la navegación
   const [reportType, setReportType] = useState('selection');
@@ -181,7 +217,7 @@ export default function App() {
   // Estado unificado del formulario
   const [formData, setFormData] = useState({
     line: '', model: '', workOrder: '', date: new Date().toISOString().split('T')[0],
-    inspector: '', shift: 'A', boxNumber: '', country: 'ARG',
+    inspector: 'GATICA', shift: 'A', boxNumber: '', country: 'ARG',
     cfcTopEngineer: '', shipMarket: '', xcvrNo: '', salesModel: '',
     swVersion1FF: '', fileName1FF: '', swKit: '', tacVerify: '',
     simCardLock: 'SI', memoryCard: 'NO', cfcSwnRef: 'N/A', powerUpMessage: 'N/A', smv: 'N/A', testSystemReady: 'N/A',
@@ -190,6 +226,15 @@ export default function App() {
     totalRom: '', usedRom: '', ramStorage: '', frontHousingColor: '', imeiCheck: '', qaStatus: 'PASS', simLockQa: 'NA', iccid: 'NA', sdStorageQa: 'NO',
     programName: '',
     checklistValues: INITIAL_CHECKLIST.reduce((acc, item) => ({ ...acc, [item.id]: item.result }), {}),
+    // Nuevos campos para Label Inspection
+    tacCode: '', imeiLabel: '', eanCode: '', productDescription: '', productLabelLocation: '',
+    batCvrNumber: '', unitBoxNumber: '', trayNumber: '', simToolInsert: '', sleeveNumber: '',
+    overpackNumber: '', overpackInsertNumber: '', manualNumber: '', batteryLabel: '', masterTape: '',
+    customerCling: '', resistFilm: '', protectingSleeve: '', sealingMachine: '', sealLabel: '',
+    unitBoxLabel: '', imeiLabelPn: '', voidLabel: '', tailBoxLabel: '', cartonBoxLabel: '',
+    batteryCvr: '', chargerKit: '', dataCable: '', cardPin: '', cardPinPaper: '',
+    simCardPn: '', headset: '', palletLabelCode: '',
+    qaChecklistValues: QA_CHECKLIST_ROWS.reduce((acc, item) => ({ ...acc, [item.id]: item.default || 'PASS' }), {}),
     labelPartNumber: ''
   });
 
@@ -197,7 +242,16 @@ export default function App() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const upperFields = ['line', 'model', 'workOrder', 'xcvrNo', 'salesModel', 'swKit', 'cfcTopEngineer', 'labelPartNumber', 'hardwareSku', 'fccId', 'iccid', 'programName'];
+    const upperFields = [
+      'line', 'model', 'workOrder', 'xcvrNo', 'salesModel', 'swKit', 'cfcTopEngineer',
+      'labelPartNumber', 'hardwareSku', 'fccId', 'iccid', 'programName',
+      'tacCode', 'imeiLabel', 'eanCode', 'productDescription', 'batCvrNumber', 'unitBoxNumber',
+      'trayNumber', 'simToolInsert', 'sleeveNumber', 'overpackNumber', 'overpackInsertNumber',
+      'manualNumber', 'batteryLabel', 'masterTape', 'customerCling', 'resistFilm',
+      'protectingSleeve', 'sealingMachine', 'sealLabel', 'unitBoxLabel', 'imeiLabelPn',
+      'voidLabel', 'tailBoxLabel', 'cartonBoxLabel', 'batteryCvr', 'chargerKit',
+      'dataCable', 'cardPin', 'cardPinPaper', 'simCardPn', 'headset', 'palletLabelCode'
+    ];
 
     if (upperFields.includes(name)) {
       setFormData(prev => ({ ...prev, [name]: value.toUpperCase() }));
@@ -212,7 +266,15 @@ export default function App() {
         ...prev,
         cfcTopEngineer: '', xcvrNo: '', salesModel: '', swVersion1FF: '', swKit: '', fileName1FF: '', tacVerify: '',
         hardwareSku: '', bpVersion: '', fccId: '', btAddress: '', wifiAddress: '', buildNumber: '', totalRom: '', usedRom: '', imeiCheck: '',
-        programName: '', shipMarket: ''
+        programName: '', shipMarket: '',
+        tacCode: '', imeiLabel: '', eanCode: '', productDescription: '', productLabelLocation: '',
+        batCvrNumber: '', unitBoxNumber: '', trayNumber: '', simToolInsert: '', sleeveNumber: '',
+        overpackNumber: '', overpackInsertNumber: '', manualNumber: '', batteryLabel: '', masterTape: '',
+        customerCling: '', resistFilm: '', protectingSleeve: '', sealingMachine: '', sealLabel: '',
+        unitBoxLabel: '', imeiLabelPn: '', voidLabel: '', tailBoxLabel: '', cartonBoxLabel: '',
+        batteryCvr: '', chargerKit: '', dataCable: '', cardPin: '', cardPinPaper: '',
+        simCardPn: '', headset: '', palletLabelCode: '',
+        qaChecklistValues: QA_CHECKLIST_ROWS.reduce((acc, item) => ({ ...acc, [item.id]: item.default || 'PASS' }), {})
       }));
       setImages({});
     }
@@ -669,9 +731,94 @@ export default function App() {
 
               {/* FORMULARIO LABEL */}
               {reportType === 'label' && (
-                <div className="space-y-4">
-                  <div className="p-4 bg-yellow-50 text-yellow-800 text-sm rounded border border-yellow-200">🚧 Funcionalidad de Labels pendiente de rediseño visual.</div>
-                  <input type="text" name="labelPartNumber" value={formData.labelPartNumber} onChange={handleChange} className="w-full p-3 border border-slate-200 rounded-lg outline-none uppercase" placeholder="P/N..." />
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-purple-600 bg-purple-50 p-2 rounded uppercase">Tabla 1: Embalaje</div>
+                    <div className="grid grid-cols-1 gap-2">
+                      <input type="text" name="salesModel" value={formData.salesModel} onChange={handleChange} placeholder="S/M (Sales Model)" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="tacCode" value={formData.tacCode} onChange={handleChange} placeholder="TAC Code" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="imeiLabel" value={formData.imeiLabel} onChange={handleChange} placeholder="IMEI or MEID" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="eanCode" value={formData.eanCode} onChange={handleChange} placeholder="EAN CODE" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="fccId" value={formData.fccId} onChange={handleChange} placeholder="FCC ID" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="productDescription" value={formData.productDescription} onChange={handleChange} placeholder="Product description" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="productLabelLocation" value={formData.productLabelLocation} onChange={handleChange} placeholder="Product label location" className="w-full p-2 border rounded text-sm" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 pt-4 border-t-2 border-slate-200">
+                    <div className="text-xs font-bold text-purple-600 bg-purple-50 p-2 rounded uppercase">Tabla 2: Contenido</div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      <input type="text" name="batCvrNumber" value={formData.batCvrNumber} onChange={handleChange} placeholder="BAT CVR Number" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="xcvrNo" value={formData.xcvrNo} onChange={handleChange} placeholder="XCVR No." className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="unitBoxNumber" value={formData.unitBoxNumber} onChange={handleChange} placeholder="Unit Box Number" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="trayNumber" value={formData.trayNumber} onChange={handleChange} placeholder="Tray Number" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="simToolInsert" value={formData.simToolInsert} onChange={handleChange} placeholder="SIM Tool Insert" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="sleeveNumber" value={formData.sleeveNumber} onChange={handleChange} placeholder="Sleeve Number" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="overpackNumber" value={formData.overpackNumber} onChange={handleChange} placeholder="Overpack Number" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="overpackInsertNumber" value={formData.overpackInsertNumber} onChange={handleChange} placeholder="Overpack Insert" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="manualNumber" value={formData.manualNumber} onChange={handleChange} placeholder="Manual Number" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="batteryLabel" value={formData.batteryLabel} onChange={handleChange} placeholder="Battery Label" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="masterTape" value={formData.masterTape} onChange={handleChange} placeholder="Master Tape" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="customerCling" value={formData.customerCling} onChange={handleChange} placeholder="Customer Cling" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="resistFilm" value={formData.resistFilm} onChange={handleChange} placeholder="Resist Film" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="protectingSleeve" value={formData.protectingSleeve} onChange={handleChange} placeholder="Protecting Sleeve" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="sealingMachine" value={formData.sealingMachine} onChange={handleChange} placeholder="Sealing Machine Cert" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="sealLabel" value={formData.sealLabel} onChange={handleChange} placeholder="Seal Label" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="unitBoxLabel" value={formData.unitBoxLabel} onChange={handleChange} placeholder="Unit Box Label" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="imeiLabelPn" value={formData.imeiLabelPn} onChange={handleChange} placeholder="IMEI Label P/N" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="voidLabel" value={formData.voidLabel} onChange={handleChange} placeholder="VOID Label" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="tailBoxLabel" value={formData.tailBoxLabel} onChange={handleChange} placeholder="Tail Box Label" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="cartonBoxLabel" value={formData.cartonBoxLabel} onChange={handleChange} placeholder="Carton Box Label" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="batteryCvr" value={formData.batteryCvr} onChange={handleChange} placeholder="Battery CVR" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="chargerKit" value={formData.chargerKit} onChange={handleChange} placeholder="Charger Kit" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="dataCable" value={formData.dataCable} onChange={handleChange} placeholder="Data Cable" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="cardPin" value={formData.cardPin} onChange={handleChange} placeholder="Card Pin" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="cardPinPaper" value={formData.cardPinPaper} onChange={handleChange} placeholder="Card Pin Paper" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="simCardPn" value={formData.simCardPn} onChange={handleChange} placeholder="SIM Card P/N" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="headset" value={formData.headset} onChange={handleChange} placeholder="Headset" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="palletLabelCode" value={formData.palletLabelCode} onChange={handleChange} placeholder="Pallet Label Code" className="w-full p-2 border rounded text-sm uppercase" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 pt-4 border-t-2 border-slate-200">
+                    <div className="text-xs font-bold text-purple-600 bg-purple-50 p-2 rounded uppercase flex justify-between items-center"><span>QA Checklist</span><ListTodo className="w-3 h-3" /></div>
+                    <div className="space-y-1">
+                      {QA_CHECKLIST_ROWS.map(row => (
+                        <div key={row.id} className="flex items-center justify-between gap-2 p-1 border-b border-slate-50 hover:bg-slate-50">
+                          <div className="flex flex-col">
+                            {row.step && <span className="text-[10px] font-bold text-slate-400 uppercase leading-none">{row.step}</span>}
+                            <span className="text-[11px] text-slate-700 font-medium leading-tight">{row.desc}</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={formData.qaChecklistValues[row.id]}
+                            onChange={(e) => setFormData(prev => ({
+                              ...prev,
+                              qaChecklistValues: { ...prev.qaChecklistValues, [row.id]: e.target.value.toUpperCase() }
+                            }))}
+                            className="text-[10px] p-1 border rounded w-24 text-center font-bold"
+                            placeholder="Estado"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 pt-4 border-t-2 border-slate-200">
+                    <div className="text-xs font-bold text-purple-600 bg-purple-50 p-2 rounded uppercase flex justify-between items-center"><span>Evidencia Fotográfica</span><ImageIcon className="w-3 h-3" /></div>
+                    <div className="space-y-4">
+                      {photoSections.map(section => (
+                        <div key={section.id} className="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                          <div className="text-xs font-bold text-slate-600 uppercase mb-2 flex items-center gap-2 leading-tight"><Grid className="w-3 h-3 flex-shrink-0" />{section.title}</div>
+                          <div className="grid grid-cols-3 gap-2">
+                            {images[section.id] && images[section.id].map((_, idx) => (
+                              <div key={idx} className="aspect-[9/16]">{renderImageSlot(section.id, idx)}</div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -710,24 +857,24 @@ export default function App() {
 
                     <div className="border border-black text-sm">
                       <div className="flex border-b border-black">
-                        <div className="w-1/3 border-r border-black p-1 font-bold flex items-center">Build Of Two Type:</div>
-                        <div className="w-2/3 p-1 flex justify-around items-center"><span>Phone submit &nbsp; <b>VERDADERO</b></span><span>Paper submit &nbsp; FALSO</span></div>
+                        <div className="w-1/3 border-r border-black p-2 font-bold flex items-center justify-center text-center">Build Of Two Type:</div>
+                        <div className="w-2/3 p-2 flex justify-around items-center text-center"><span>Phone submit &nbsp; <b>VERDADERO</b></span><span>Paper submit &nbsp; FALSO</span></div>
                       </div>
                       <div className="flex border-b border-black">
-                        <div className="w-32 border-r border-black p-1 font-bold bg-white flex items-center">Product:</div>
-                        <div className="flex-1 p-1 uppercase flex items-center justify-center">{formData.model}</div>
+                        <div className="w-32 border-r border-black p-2 font-bold bg-white flex items-center justify-center text-center">Product:</div>
+                        <div className="flex-1 p-2 uppercase flex items-center justify-center text-center">{formData.model}</div>
                       </div>
                       <div className="flex">
-                        <div className="w-32 border-r border-black p-1 font-bold flex items-center">Country:</div>
-                        <div className="w-48 border-r border-black p-1 uppercase flex items-center justify-center">{formData.country}</div>
-                        <div className="flex-1 text-right p-1 font-bold pr-2 flex items-center justify-end">Name /Date:</div>
-                        <div className="w-32 border-l border-black p-1 text-center flex items-center justify-center">{formData.date} / {formData.inspector}</div>
+                        <div className="w-32 border-r border-black p-2 font-bold flex items-center justify-center text-center">Country:</div>
+                        <div className="w-48 border-r border-black p-2 uppercase flex items-center justify-center text-center">{formData.country}</div>
+                        <div className="flex-1 text-center p-2 font-bold flex items-center justify-center">Name /Date:</div>
+                        <div className="w-48 border-l border-black p-2 text-center flex items-center justify-center">{formData.date} / {formData.inspector}</div>
                       </div>
                     </div>
 
-                    <div className="bg-[#5B9BD5] text-white font-bold text-center p-1 border-x border-b border-black text-sm mt-2">En la siguiente área requieren que los ingenieros los completen.</div>
+                    <div className="bg-[#5B9BD5] text-white font-bold text-center p-2 border-x border-b border-black text-sm mt-2 flex items-center justify-center min-h-[2rem]">En la siguiente área requieren que los ingenieros los completen.</div>
                     <table className="w-full border-collapse border border-black text-sm">
-                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-1 w-1/3 text-center">Items</th><th className="border border-black p-1 w-1/3 text-center">Contenido</th><th className="border border-black p-1 w-1/3 text-center">Datos</th></tr></thead>
+                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-2 w-1/3 text-center align-middle">Items</th><th className="border border-black p-2 w-1/3 text-center align-middle">Contenido</th><th className="border border-black p-2 w-1/3 text-center align-middle">Datos</th></tr></thead>
                       <tbody className="text-center">
                         {[
                           { label: 'CFC TOP Engineer:', val: formData.cfcTopEngineer, hasInput: true },
@@ -751,14 +898,18 @@ export default function App() {
                           { label: 'TAC (range) verify on phone', val: formData.tacVerify ? `TAC (range): ${formData.tacVerify}` : '' },
                           { label: 'Customer back SW ready? (Y/N)', val: formData.customerBackSwReady },
                         ].map((row, idx) => (
-                          <tr key={idx} className="bg-white"><td className="border border-black p-1 font-medium text-right pr-4 whitespace-nowrap align-middle">{row.label}</td><td className="border border-black p-1 text-center font-bold text-slate-700 align-middle">{row.val}</td><td className="border border-black p-1 relative align-middle">{row.hasInput && <div className="w-full h-6 border-2 border-green-600 rounded-sm"></div>}</td></tr>
+                          <tr key={idx} className="bg-white">
+                            <td className="border border-black p-3 font-medium text-center align-middle pr-4 whitespace-nowrap">{row.label}</td>
+                            <td className="border border-black p-3 text-center align-middle font-bold text-slate-700">{row.val}</td>
+                            <td className="border border-black p-3 relative align-middle">{row.hasInput && <div className="w-full h-8 border-2 border-green-600 rounded-sm mx-auto"></div>}</td>
+                          </tr>
                         ))}
                       </tbody>
                     </table>
 
-                    <div className="bg-[#5B9BD5] text-white font-bold text-center p-1 border-x border-b border-black text-sm mt-0">En la siguiente área requieren que el personal de QA lo completen.</div>
+                    <div className="bg-[#5B9BD5] text-white font-bold text-center p-2 border-x border-b border-black text-sm mt-0 flex items-center justify-center min-h-[2rem]">En la siguiente área requieren que el personal de QA lo completen.</div>
                     <table className="w-full border-collapse border border-black text-sm">
-                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-1 w-1/3 text-center">Items</th><th className="border border-black p-1 w-1/3 text-center">Contenido</th><th className="border border-black p-1 w-1/3 text-center">Datos</th></tr></thead>
+                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-2 w-1/3 text-center align-middle">Items</th><th className="border border-black p-2 w-1/3 text-center align-middle">Contenido</th><th className="border border-black p-2 w-1/3 text-center align-middle">Datos</th></tr></thead>
                       <tbody className="text-center">
                         {[
                           { label: 'CFC CQA:', val: formData.cfcTopEngineer },
@@ -786,7 +937,11 @@ export default function App() {
                           { label: 'IMEI (range) verify result:', val: formData.tacVerify },
                           { label: 'Estado', val: formData.qaStatus },
                         ].map((row, idx) => (
-                          <tr key={`qa-${idx}`} className="bg-white"><td className="border border-black p-1 font-medium text-right pr-4 whitespace-nowrap align-middle">{row.label}</td><td className="border border-black p-1 text-center font-bold text-slate-700 align-middle"></td><td className="border border-black p-1 font-bold text-slate-800 text-center align-middle">{row.val}</td></tr>
+                          <tr key={`qa-${idx}`} className="bg-white">
+                            <td className="border border-black p-3 font-medium text-center align-middle pr-4 whitespace-nowrap">{row.label}</td>
+                            <td className="border border-black p-3 text-center align-middle font-bold text-slate-700"></td>
+                            <td className="border border-black p-3 font-bold text-slate-800 text-center align-middle">{row.val}</td>
+                          </tr>
                         ))}
                       </tbody>
                     </table>
@@ -794,27 +949,32 @@ export default function App() {
                     <div className="mt-8 page-break-before">
                       <div className="text-center mb-1"><h1 className="text-xl font-bold uppercase underline decoration-2 underline-offset-4">BUILD OF TWO CHECKLIST</h1></div>
                       <div className="border border-black text-sm bg-[#FFF2CC] avoid-break">
-                        <div className="flex">
-                          <div className="w-32 border-r border-black p-1 font-bold flex items-center">Product</div>
-                          <div className="w-1/3 border-r border-black p-1 uppercase flex items-center justify-center">{formData.programName}</div>
-                          <div className="flex-1"></div>
-                          <div className="w-16 border-l border-black p-1 font-bold flex items-center justify-center">S/M</div>
-                          <div className="w-32 border-l border-black p-1 uppercase flex items-center justify-center">{formData.salesModel}</div>
+                        <div className="flex border-b border-black">
+                          <div className="w-32 border-r border-black p-2 font-bold flex items-center justify-center text-center">Product</div>
+                          <div className="w-1/3 border-r border-black p-2 uppercase flex items-center justify-center text-center">{formData.programName}</div>
+                          <div className="flex-1 bg-white"></div>
+                          <div className="w-16 border-l border-black p-2 font-bold flex items-center justify-center text-center">S/M</div>
+                          <div className="w-32 border-l border-black p-2 uppercase flex items-center justify-center text-center">{formData.salesModel}</div>
                         </div>
-                        <div className="flex border-t border-black">
-                          <div className="w-32 border-r border-black p-1 font-bold flex items-center">Country</div>
-                          <div className="w-1/3 border-r border-black p-1 uppercase flex items-center justify-center">{formData.country}</div>
-                          <div className="flex-1"></div>
-                          <div className="w-16 border-l border-black p-1 font-bold flex items-center justify-center">Date</div>
-                          <div className="w-32 border-l border-black p-1 flex items-center justify-center">{formData.date}</div>
+                        <div className="flex border-b border-black">
+                          <div className="w-32 border-r border-black p-2 font-bold flex items-center justify-center text-center">Country</div>
+                          <div className="w-1/3 border-r border-black p-2 uppercase flex items-center justify-center text-center">{formData.country}</div>
+                          <div className="flex-1 bg-white"></div>
+                          <div className="w-16 border-l border-black p-2 font-bold flex items-center justify-center text-center">Date</div>
+                          <div className="w-48 border-l border-black p-2 flex items-center justify-center text-center">{formData.date}</div>
                         </div>
-                        <div className="flex border-t border-black justify-end"><div className="p-1 uppercase font-bold mr-2">{formData.cfcTopEngineer}</div></div>
+                        <div className="flex justify-end bg-white"><div className="p-2 uppercase font-bold mr-2 text-center align-middle">{formData.cfcTopEngineer}</div></div>
                       </div>
                       <table className="w-full border-collapse border border-black text-xs mt-2">
-                        <thead><tr className="bg-[#FFF2CC]"><th className="border border-black p-1 w-8">No.</th><th className="border border-black p-1 w-48">Chequear Items</th><th className="border border-black p-1">Chequear Contenido</th><th className="border border-black p-1 w-24">Resultado</th></tr></thead>
+                        <thead><tr className="bg-[#FFF2CC]"><th className="border border-black p-2 w-8 text-center align-middle">No.</th><th className="border border-black p-2 w-48 text-center align-middle">Chequear Items</th><th className="border border-black p-2 text-center align-middle">Chequear Contenido</th><th className="border border-black p-2 w-24 text-center align-middle">Resultado</th></tr></thead>
                         <tbody>
                           {INITIAL_CHECKLIST.map((row) => (
-                            <tr key={row.id} className={row.isHeader ? 'bg-yellow-200' : 'bg-white'}><td className="border border-black p-1 text-center align-middle">{row.id}</td><td className="border border-black p-1 font-medium align-middle">{row.item}</td><td className="border border-black p-1 align-middle">{row.content}</td><td className={`border border-black p-1 text-center font-bold align-middle ${formData.checklistValues[row.id] === 'FAIL' ? 'text-red-600' : 'text-slate-800'}`}>{formData.checklistValues[row.id]}</td></tr>
+                            <tr key={row.id} className={row.isHeader ? 'bg-yellow-200' : 'bg-white'}>
+                              <td className="border border-black p-3 text-center align-middle">{row.id}</td>
+                              <td className="border border-black p-3 font-medium align-middle text-center">{row.item}</td>
+                              <td className="border border-black p-3 align-middle text-center">{row.content}</td>
+                              <td className={`border border-black p-3 text-center font-bold align-middle ${formData.checklistValues[row.id] === 'FAIL' ? 'text-red-600' : 'text-slate-800'}`}>{formData.checklistValues[row.id]}</td>
+                            </tr>
                           ))}
                         </tbody>
                       </table>
@@ -824,24 +984,25 @@ export default function App() {
                       <div className="text-center mb-1"><h1 className="text-xl font-bold uppercase underline decoration-2 underline-offset-4">EVIDENCIA FOTOGRÁFICA</h1></div>
                       <div className="border border-black text-sm bg-white mb-2 avoid-break">
                         <div className="flex border-b border-black">
-                          <div className="w-24 border-r border-black p-1 font-bold flex items-center">Country</div><div className="w-32 border-r border-black p-1 uppercase flex items-center justify-center">{formData.country}</div>
-                          <div className="w-24 border-r border-black p-1 font-bold flex items-center">SVN KIT#</div><div className="flex-1 border-r border-black p-1 uppercase flex items-center justify-center">{formData.swKit}</div>
-                          <div className="w-16 border-r border-black p-1 font-bold flex items-center">S/M</div><div className="w-32 border-r border-black p-1 uppercase flex items-center justify-center">{formData.salesModel}</div>
-                          <div className="w-16 border-r border-black p-1 font-bold flex items-center">Date</div><div className="w-24 p-1 flex items-center justify-center">{formData.date}</div>
+                          <div className="w-24 border-r border-black p-2 font-bold flex items-center justify-center text-center">Country</div><div className="w-32 border-r border-black p-2 uppercase flex items-center justify-center text-center">{formData.country}</div>
+                          <div className="w-24 border-r border-black p-2 font-bold flex items-center justify-center text-center">SVN KIT#</div><div className="flex-1 border-r border-black p-2 uppercase flex items-center justify-center text-center">{formData.swKit}</div>
+                          <div className="w-16 border-r border-black p-2 font-bold flex items-center justify-center text-center">S/M</div><div className="w-32 border-r border-black p-2 uppercase flex items-center justify-center text-center">{formData.salesModel}</div>
+                          <div className="w-16 border-r border-black p-2 font-bold flex items-center justify-center text-center">Date</div><div className="w-24 p-2 flex items-center justify-center text-center">{formData.date}</div>
                         </div>
                       </div>
                       {photoSections.map((section) => (
                         <div key={section.id} className="mt-4">
-                          <div className="bg-[#5B9BD5] text-white font-bold p-1 border border-black text-sm">{section.title}</div>
-                          <div className={`grid ${section.id === 'group2' ? 'grid-cols-2' : 'grid-cols-5'} gap-1 border-x border-b border-black p-1`}>
+                          <div className="bg-[#5B9BD5] text-white font-bold p-2 border border-black text-sm flex items-center justify-center min-h-[2rem]">{section.title}</div>
+                          <div className={`grid ${section.id === 'group2' ? 'grid-cols-2' : 'grid-cols-5'} gap-1 border-x border-b border-black p-1 text-center align-middle`}>
                             {images[section.id] && images[section.id].map((img, idx) => (
                               img.src && (
                                 <div key={idx} className="flex flex-col items-center border border-slate-300 p-0.5 avoid-break">
                                   <div className={`relative w-full ${section.id === 'group2' ? 'h-96' : 'h-40'} overflow-hidden bg-slate-100 flex items-center justify-center`}><img src={img.src} className="max-w-full max-h-full object-contain" style={{ transform: `rotate(${img.rotation}deg) scale(${img.scale})` }} alt={`Evidence ${idx}`} /></div>
+                                  <div className="text-[10px] p-2 w-full text-center align-middle bg-slate-50 border-t border-black font-bold uppercase truncate">{section.id === 'group2' ? `FOTO ${idx + 1}` : `EVIDENCIA ${idx + 1}`}</div>
                                 </div>
                               )
                             ))}
-                            {(!images[section.id] || images[section.id].every(img => !img.src)) && <div className={`text-center text-xs text-slate-400 italic py-4 ${section.id === 'group2' ? 'col-span-2' : 'col-span-5'}`}>Sin evidencia adjunta en esta sección.</div>}
+                            {(!images[section.id] || images[section.id].every(img => !img.src)) && <div className={`text-center align-middle text-xs text-slate-400 italic py-4 flex items-center justify-center ${section.id === 'group2' ? 'col-span-2' : 'col-span-5'}`}>Sin evidencia adjunta en esta sección.</div>}
                           </div>
                         </div>
                       ))}
@@ -849,9 +1010,184 @@ export default function App() {
 
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center h-full text-slate-400">
-                    <ScanBarcode className="w-16 h-16 mb-4 opacity-20" />
-                    <p>Vista previa no configurada para formato Label</p>
+                  <div className="min-w-[700px] bg-white" ref={tableRef} id="printable-section">
+
+                    {/* Header Label - Orange/Brown Style */}
+                    <div className="grid grid-cols-2 border border-black text-sm text-center">
+                      <div className="bg-orange-200 border-r border-black font-bold p-3 flex items-center justify-center">New Product Open Box Check List -</div>
+                      <div className="bg-orange-200 font-bold p-3 flex items-center justify-center">{formData.hardwareSku || 'XT...'}</div>
+                      <div className="bg-orange-300 border-r border-t border-black font-bold p-3 flex items-center justify-center">Carrier:</div>
+                      <div className="bg-orange-300 border-t border-black font-bold p-3 flex justify-around items-center">
+                        <span>Argentina</span>
+                        <span>Master List</span>
+                      </div>
+                    </div>
+
+                    {/* Title Bar */}
+                    <div className="bg-orange-600 text-white font-bold text-center border-x border-b border-black text-sm py-2 min-h-[2rem] flex items-center justify-center">
+                      Contenido de la caja física
+                    </div>
+
+                    {/* TABLA 1: EMBALAJE */}
+                    <table className="w-full border-collapse border border-black text-xs">
+                      <thead>
+                        <tr className="bg-blue-100">
+                          <th className="border border-black p-2 w-8 text-center align-middle">#</th>
+                          <th className="border border-black p-2 w-40 text-center align-middle">EMBALAJE</th>
+                          <th className="border border-black p-2 text-center align-middle">Complete la información específica para el modelo de teléfono.</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { id: 1, label: 'S/M', val: formData.salesModel },
+                          { id: 2, label: 'TAC Code', val: formData.tacCode },
+                          { id: 3, label: 'IMEI or MEID', val: formData.imeiLabel },
+                          { id: 4, label: 'EAN CODE', val: formData.eanCode },
+                          { id: 5, label: 'FCC ID', val: formData.fccId },
+                          { id: 6, label: 'Product description', val: formData.productDescription },
+                          { id: 8, label: 'Product label', val: formData.productLabelLocation, sub: 'Ubicacion' },
+                        ].map((row) => (
+                          <tr key={row.id} className="bg-white">
+                            <td className="border border-black py-4 px-2 text-center align-middle">{row.id}</td>
+                            <td className="border border-black py-4 px-2 font-bold text-center align-middle">
+                              <div className="flex flex-col items-center justify-center">
+                                <span>{row.label}</span>
+                                {row.sub && <span className="font-normal text-[10px] mt-1">{row.sub}</span>}
+                              </div>
+                            </td>
+                            <td className="border border-black py-4 px-2 text-center align-middle font-bold uppercase">{row.val}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
+                    {/* TABLA 2: CONTENIDO */}
+                    <table className="w-full border-collapse border-x border-b border-black text-xs">
+                      <thead>
+                        <tr className="bg-blue-100">
+                          <th className="border border-black p-2 w-8"></th>
+                          <th className="border border-black p-2 w-40 text-center align-middle">Contenido de la caja</th>
+                          <th className="border border-black p-2 text-center align-middle">Complete la información específica para el modelo de teléfono.</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { id: 9, label: 'BAT CVR', sub: 'Battery Door Assembly Number', val: formData.batCvrNumber },
+                          { id: 10, label: 'XCVR', sub: 'CFC XCVR/Factory xcvr', val: formData.xcvrNo },
+                          { id: 11, label: 'BX,BOX', sub: 'Caja unitaria', val: formData.unitBoxNumber },
+                          { id: 12, label: 'SIMTRAY', sub: 'La bandeja del teléfono', val: formData.trayNumber },
+                          { id: 13, label: 'Cod herramienta SIM', sub: 'Carton de herramienta SIM', val: formData.simToolInsert },
+                          { id: 14, label: 'Sleeve', sub: 'Manga', val: formData.sleeveNumber },
+                          { id: 15, label: 'Overpack', sub: '', val: formData.overpackNumber },
+                          { id: 16, label: 'Overpack Insert', sub: '', val: formData.overpackInsertNumber },
+                          { id: 17, label: 'MAN', sub: 'INSERTO CONTENIDO', val: formData.manualNumber },
+                          { id: 18, label: 'Battery Energy Label', sub: 'Etiqueta de energía de la batería (AC ADAPTER MOTO)', val: formData.batteryLabel },
+                          { id: 19, label: 'TAPE', sub: 'ETIQUETA VOID PARA MASTER BOX', val: formData.masterTape },
+                          { id: 20, label: 'Custemer Cling', sub: 'Protector de pantalla o pañal', val: formData.customerCling },
+                          { id: 21, label: 'Resist film', sub: '', val: formData.resistFilm },
+                          { id: 22, label: 'Protecting sleeve', sub: 'Funda protectora', val: formData.protectingSleeve },
+                          { id: 23, label: 'Sealing machine', sub: 'certificado de máquina selladora', val: formData.sealingMachine },
+                          { id: 24, label: 'Seal Label', sub: 'Etiqueta de sello', val: formData.sealLabel },
+                          { id: 25, label: 'Unit box label', sub: 'ETIQUETA VOID PARA CAJA UNITARIA', val: formData.unitBoxLabel },
+                          { id: 26, label: 'IMEI Label', sub: 'Etiqueta IMEI', val: formData.imeiLabelPn },
+                          { id: 27, label: 'VOID', sub: 'Etiqueta de seguridad', val: formData.voidLabel },
+                          { id: 28, label: 'Tail box label', sub: 'Etiqueta de la caja de cola', val: formData.tailBoxLabel },
+                          { id: 29, label: 'Carton box label', sub: 'Etiqueta de caja master', val: formData.cartonBoxLabel },
+                          { id: 30, label: 'BAT CVR', sub: 'batería', val: formData.batteryCvr },
+                          { id: 31, label: 'CHARGER', sub: 'Número de kit de cargador', val: formData.chargerKit },
+                          { id: 32, label: 'DATCABLE', sub: 'Cable de datos', val: formData.dataCable },
+                          { id: 33, label: 'Card pin', sub: 'Alfiler de tarjeta - herramienta', val: formData.cardPin },
+                          { id: 34, label: 'Card pin paper', sub: 'Papel para alfileres de tarjetas', val: formData.cardPinPaper },
+                          { id: 35, label: 'SIM CARD Part Number', sub: 'El ID de la tarjeta SIM coincide con el ID de la tarjeta SIM del contenido...', val: formData.simCardPn },
+                          { id: 36, label: 'HEADSET', sub: 'Auriculares', val: formData.headset },
+                          { id: 37, label: 'Código de aprobación...', sub: 'Compruebe que el código de aprobación coincide...', val: formData.palletLabelCode },
+                        ].map((row) => (
+                          <tr key={row.id} className="bg-white">
+                            <td className="border border-black py-4 px-2 w-8 text-center align-middle">{row.id}</td>
+                            <td className="border border-black py-4 px-2 w-[40%] text-center align-middle">
+                              <div className="font-bold mb-1">{row.label}</div>
+                              {row.sub && <div className="text-[10px] text-slate-600 leading-tight">{row.sub}</div>}
+                            </td>
+                            <td className="border border-black py-4 px-2 text-center align-middle font-bold uppercase">{row.val}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
+                    {/* NUEVA SECCIÓN: QA BOX OPENING CHECKLIST */}
+                    <div className="mt-8 page-break-before avoid-break">
+                      <div className="bg-[#B4C6E7] text-center font-bold border border-black p-2 text-sm min-h-[2rem] flex items-center justify-center">QA BOX OPENING CHECKLIST</div>
+
+                      {/* QA Header */}
+                      <div className="border-x border-b border-black text-[10px] bg-[#E9EBF5]">
+                        <div className="flex border-b border-black">
+                          <div className="w-24 p-1 font-bold border-r border-black flex items-center justify-center text-center">Product description :</div>
+                          <div className="flex-1 p-1 border-r border-black font-bold uppercase flex items-center justify-center text-center">{formData.productDescription}</div>
+                          <div className="w-16 p-1 font-bold border-r border-black bg-[#D9D9D9] flex items-center justify-center text-center">XCVR NO :</div>
+                          <div className="w-24 p-1 border-r border-black text-center flex items-center justify-center text-center">{formData.xcvrNo}</div>
+                          <div className="w-16 p-1 font-bold border-r border-black bg-[#D9D9D9] flex items-center justify-center text-center">Result:</div>
+                          <div className="w-16 p-1 text-center font-bold flex items-center justify-center text-center">PASS</div>
+                        </div>
+                        <div className="flex border-b border-black">
+                          <div className="w-24 p-1 font-bold border-r border-black flex items-center justify-center text-center">S/M :</div>
+                          <div className="flex-1 p-1 border-r border-black uppercase flex items-center justify-center text-center">{formData.salesModel}</div>
+                          <div className="w-16 p-1 font-bold border-r border-black bg-[#D9D9D9] flex items-center justify-center text-center">Received date:</div>
+                          <div className="w-24 p-1 border-r border-black text-center flex items-center justify-center text-center">{formData.date}</div>
+                          <div className="w-16 p-1 font-bold border-r border-black bg-[#D9D9D9] flex items-center justify-center text-center">Checked By:</div>
+                          <div className="w-16 p-1 text-center uppercase flex items-center justify-center text-center">{formData.inspector}</div>
+                        </div>
+                        <div className="flex">
+                          <div className="w-24 p-1 font-bold border-r border-black flex items-center justify-center text-center">Ship-to Region/Country:</div>
+                          <div className="flex-1 p-1 border-r border-black uppercase flex items-center justify-center text-center">{formData.country}</div>
+                          <div className="w-16 p-1 font-bold border-r border-black bg-[#D9D9D9] flex items-center justify-center text-center"></div>
+                          <div className="w-24 p-1 border-r border-black flex items-center justify-center text-center"></div>
+                          <div className="w-16 p-1 font-bold border-r border-black bg-[#D9D9D9] flex items-center justify-center text-center">Finished Date:</div>
+                          <div className="w-16 p-1 text-center flex items-center justify-center text-center">{formData.date}</div>
+                        </div>
+                      </div>
+
+                      {/* QA Table */}
+                      <table className="w-full border-collapse border border-black text-[10px]">
+                        <thead>
+                          <tr className="bg-[#E9EBF5]">
+                            <th className="border border-black p-2 w-24 text-center align-middle">Pasos</th>
+                            <th className="border border-black p-2 text-center align-middle">Descripcion</th>
+                            <th className="border border-black p-2 w-16 text-center align-middle">Estado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {QA_CHECKLIST_ROWS.map((row) => (
+                            <tr key={row.id} className="bg-[#E2EFDA]">
+                              <td className="border border-black py-4 px-2 text-center font-bold bg-white align-middle">{row.step}</td>
+                              <td className="border border-black py-4 px-3 align-middle text-center">{row.desc}</td>
+                              <td className="border border-black py-4 px-2 text-center font-bold align-middle uppercase">
+                                {formData.qaChecklistValues[row.id]}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Evidencia Fotográfica Label */}
+                    <div className="mt-8 page-break-before">
+                      <div className="text-center mb-1"><h1 className="text-xl font-bold uppercase underline decoration-2 underline-offset-4 text-center">EVIDENCIA FOTOGRÁFICA</h1></div>
+                      {photoSections.map((section) => (
+                        <div key={section.id} className="mt-4 avoid-break">
+                          <div className="bg-purple-600 text-white font-bold p-2 border border-black text-sm flex items-center justify-center min-h-[2rem] text-center">{section.title}</div>
+                          <div className="grid grid-cols-2 gap-2 border-x border-b border-black p-2">
+                            {images[section.id] && images[section.id].map((img, idx) => (
+                              img.src && (
+                                <div key={idx} className="flex flex-col items-center border border-slate-300 p-1">
+                                  <div className="relative w-full h-64 overflow-hidden bg-slate-100 flex items-center justify-center"><img src={img.src} className="max-w-full max-h-full object-contain" style={{ transform: `rotate(${img.rotation}deg) scale(${img.scale})` }} alt={`Evidence ${idx}`} /></div>
+                                </div>
+                              )
+                            ))}
+                            {(!images[section.id] || images[section.id].every(img => !img.src)) && <div className="col-span-2 text-center text-xs text-slate-400 italic py-8">Sin evidencia adjunta en esta sección.</div>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
