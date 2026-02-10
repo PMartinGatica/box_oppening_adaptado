@@ -746,6 +746,7 @@ export default function App() {
                   <div className="space-y-3">
                     <div className="text-xs font-bold text-purple-600 bg-purple-50 p-2 rounded uppercase">Tabla 1: Embalaje</div>
                     <div className="grid grid-cols-1 gap-2">
+                      <input type="text" name="hardwareSku" value={formData.hardwareSku} onChange={handleChange} placeholder="Hardware SKU (ej: XT...)" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="salesModel" value={formData.salesModel} onChange={handleChange} placeholder="S/M (Sales Model)" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="tacCode" value={formData.tacCode} onChange={handleChange} placeholder="TAC Code" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="imeiLabel" value={formData.imeiLabel} onChange={handleChange} placeholder="IMEI or MEID" className="w-full p-2 border rounded text-sm uppercase" />
