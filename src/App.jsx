@@ -347,10 +347,11 @@ export default function App() {
       });
 
       const isSafeToCut = (y) => {
-        // Margen de seguridad (ej. 5px) para no cortar justo en el borde
-        const safetyMargin = 5 * scale;
+        // Margen de seguridad para no cortar pegado al borde del elemento
+        const safetyMargin = 2 * scale;
         for (const zone of protectedZones) {
-          if (y > (zone.top + safetyMargin) && y < (zone.bottom - safetyMargin)) {
+          // Si el punto de corte está dentro de un elemento protegido o demasiado cerca de sus bordes, no es seguro
+          if (y >= (zone.top - safetyMargin) && y <= (zone.bottom + safetyMargin)) {
             return false;
           }
         }
@@ -361,13 +362,12 @@ export default function App() {
         // Buscar hacia arriba un punto de corte seguro hasta 1/3 de la página
         const limit = targetY - (pageHeightInCanvasPixels * 0.33);
         let testY = targetY;
-        const step = 10;
 
         while (testY > limit) {
           if (isSafeToCut(testY)) {
             return testY;
           }
-          testY -= step;
+          testY -= 2; // Paso más pequeño para encontrar el espacio exacto (ej. entre fotos o filas)
         }
         return targetY; // Si no encuentra, corta donde caiga
       };
@@ -660,7 +660,7 @@ export default function App() {
             <div className="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2"><Factory className="w-4 h-4" /> Header Info</h3>
               <div className="space-y-3">
-                <div><label className="block text-xs font-bold text-slate-600 mb-1">Product Name (Model)</label><input type="text" name="model" value={formData.model} onChange={handleChange} className="w-full p-2 bg-slate-50 border border-slate-200 rounded text-sm uppercase" placeholder="PHN MOTO..." /></div>
+                <div><label className="block text-xs font-bold text-slate-600 mb-1">Product Name (Model)</label><input type="text" name="model" value={formData.model} onChange={handleChange} className="w-full p-2 bg-slate-50 border border-slate-200 rounded text-sm uppercase" placeholder="Prisma - SM description" /></div>
                 <div className="grid grid-cols-2 gap-3">
                   <div><label className="block text-xs font-bold text-slate-600 mb-1">Country</label><input type="text" name="country" value={formData.country} onChange={handleChange} className="w-full p-2 bg-slate-50 border border-slate-200 rounded text-sm uppercase" /></div>
                   <div><label className="block text-xs font-bold text-slate-600 mb-1">Date</label><input type="date" name="date" value={formData.date} onChange={handleChange} className="w-full p-2 bg-slate-50 border border-slate-200 rounded text-sm" /></div>
@@ -746,13 +746,13 @@ export default function App() {
                   <div className="space-y-3">
                     <div className="text-xs font-bold text-purple-600 bg-purple-50 p-2 rounded uppercase">Tabla 1: Embalaje</div>
                     <div className="grid grid-cols-1 gap-2">
-                      <input type="text" name="hardwareSku" value={formData.hardwareSku} onChange={handleChange} placeholder="Hardware SKU (ej: XT...)" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="hardwareSku" value={formData.hardwareSku} onChange={handleChange} placeholder="Prisma-Model Number XT2222" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="salesModel" value={formData.salesModel} onChange={handleChange} placeholder="S/M (Sales Model)" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="tacCode" value={formData.tacCode} onChange={handleChange} placeholder="TAC Code" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="imeiLabel" value={formData.imeiLabel} onChange={handleChange} placeholder="IMEI or MEID" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="imeiLabel" value={formData.imeiLabel} onChange={handleChange} placeholder="IMEI" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="eanCode" value={formData.eanCode} onChange={handleChange} placeholder="EAN CODE" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="fccId" value={formData.fccId} onChange={handleChange} placeholder="FCC ID" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="productDescription" value={formData.productDescription} onChange={handleChange} placeholder="Product description" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="productDescription" value={formData.productDescription} onChange={handleChange} placeholder="Prisma SM Description" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="productLabelLocation" value={formData.productLabelLocation} onChange={handleChange} placeholder="Pass or Fail" className="w-full p-2 border rounded text-sm" />
                     </div>
                   </div>
@@ -1185,12 +1185,12 @@ export default function App() {
                     <div className="mt-8 page-break-before">
                       <div className="text-center mb-1"><h1 className="text-xl font-bold uppercase underline decoration-2 underline-offset-4 text-center">EVIDENCIA FOTOGRÁFICA</h1></div>
                       {photoSections.map((section) => (
-                        <div key={section.id} className="mt-4 avoid-break">
+                        <div key={section.id} className="mt-4">
                           <div className="bg-purple-600 text-white font-bold p-2 border border-black text-sm flex items-center justify-center min-h-[2rem] text-center">{section.title}</div>
                           <div className="grid grid-cols-2 gap-2 border-x border-b border-black p-2">
                             {images[section.id] && images[section.id].map((img, idx) => (
                               img.src && (
-                                <div key={idx} className="flex flex-col items-center border border-slate-300 p-1">
+                                <div key={idx} className="flex flex-col items-center border border-slate-300 p-1 avoid-break">
                                   <div className="relative w-full h-64 overflow-hidden bg-slate-100 flex items-center justify-center"><img src={img.src} className="max-w-full max-h-full object-contain" style={{ transform: `rotate(${img.rotation}deg) scale(${img.scale})` }} alt={`Evidence ${idx}`} /></div>
                                 </div>
                               )
