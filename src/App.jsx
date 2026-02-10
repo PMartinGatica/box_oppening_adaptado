@@ -84,21 +84,32 @@ export default function App() {
   // --- ESTADO PARA GENERACIÓN DE PDF ---
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
-  // Secciones de fotos configurables
-  const [photoSections, setPhotoSections] = useState([
-    {
-      id: 'group1',
-      title: 'Default language & Home screen & Speed dial icon :',
-      slots: 9,
-      defaultAspect: '9/16'
-    },
-    {
-      id: 'group2',
-      title: 'System & About Phone & Device details & Device identifiers & Model & Android version & Regulatory information :',
-      slots: 20,
-      defaultAspect: '9/16'
+  // Secciones de fotos configurables según el tipo de reporte
+  const photoSections = React.useMemo(() => {
+    if (reportType === 'label') {
+      return [
+        { id: 'label_cosmetic', title: 'Inspección cosmética del teléfono', slots: 10, defaultAspect: '9/16' },
+        { id: 'label_unit_box', title: 'Caja Unitaria', slots: 10, defaultAspect: '9/16' },
+        { id: 'label_accessories', title: 'Accesorios', slots: 13, defaultAspect: '9/16' },
+        { id: 'label_master_box', title: 'Caja Master', slots: 10, defaultAspect: '9/16' },
+        { id: 'label_tags', title: 'Etiquetas', slots: 4, defaultAspect: '9/16' }
+      ];
     }
-  ]);
+    return [
+      {
+        id: 'group1',
+        title: 'Default language & Home screen & Speed dial icon :',
+        slots: 9,
+        defaultAspect: '9/16'
+      },
+      {
+        id: 'group2',
+        title: 'System & About Phone & Device details & Device identifiers & Model & Android version & Regulatory information :',
+        slots: 20,
+        defaultAspect: '9/16'
+      }
+    ];
+  }, [reportType]);
 
   // Inicializar slots de imágenes
   useEffect(() => {
