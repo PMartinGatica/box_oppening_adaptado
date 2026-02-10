@@ -752,42 +752,42 @@ export default function App() {
                       <input type="text" name="eanCode" value={formData.eanCode} onChange={handleChange} placeholder="EAN CODE" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="fccId" value={formData.fccId} onChange={handleChange} placeholder="FCC ID" className="w-full p-2 border rounded text-sm uppercase" />
                       <input type="text" name="productDescription" value={formData.productDescription} onChange={handleChange} placeholder="Product description" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="productLabelLocation" value={formData.productLabelLocation} onChange={handleChange} placeholder="Product label location" className="w-full p-2 border rounded text-sm" />
+                      <input type="text" name="productLabelLocation" value={formData.productLabelLocation} onChange={handleChange} placeholder="Pass or Fail" className="w-full p-2 border rounded text-sm" />
                     </div>
                   </div>
 
                   <div className="space-y-3 pt-4 border-t-2 border-slate-200">
                     <div className="text-xs font-bold text-purple-600 bg-purple-50 p-2 rounded uppercase">Tabla 2: Contenido</div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      <input type="text" name="batCvrNumber" value={formData.batCvrNumber} onChange={handleChange} placeholder="BAT CVR Number" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="xcvrNo" value={formData.xcvrNo} onChange={handleChange} placeholder="XCVR No." className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="unitBoxNumber" value={formData.unitBoxNumber} onChange={handleChange} placeholder="Unit Box Number" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="trayNumber" value={formData.trayNumber} onChange={handleChange} placeholder="Tray Number" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="simToolInsert" value={formData.simToolInsert} onChange={handleChange} placeholder="SIM Tool Insert" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="sleeveNumber" value={formData.sleeveNumber} onChange={handleChange} placeholder="Sleeve Number" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="overpackNumber" value={formData.overpackNumber} onChange={handleChange} placeholder="Overpack Number" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="overpackInsertNumber" value={formData.overpackInsertNumber} onChange={handleChange} placeholder="Overpack Insert" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="manualNumber" value={formData.manualNumber} onChange={handleChange} placeholder="Manual Number" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="batteryLabel" value={formData.batteryLabel} onChange={handleChange} placeholder="Battery Label" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="masterTape" value={formData.masterTape} onChange={handleChange} placeholder="Master Tape" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="customerCling" value={formData.customerCling} onChange={handleChange} placeholder="Customer Cling" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="resistFilm" value={formData.resistFilm} onChange={handleChange} placeholder="Resist Film" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="protectingSleeve" value={formData.protectingSleeve} onChange={handleChange} placeholder="Protecting Sleeve" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="sealingMachine" value={formData.sealingMachine} onChange={handleChange} placeholder="Sealing Machine Cert" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="sealLabel" value={formData.sealLabel} onChange={handleChange} placeholder="Seal Label" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="unitBoxLabel" value={formData.unitBoxLabel} onChange={handleChange} placeholder="Unit Box Label" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="imeiLabelPn" value={formData.imeiLabelPn} onChange={handleChange} placeholder="IMEI Label P/N" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="voidLabel" value={formData.voidLabel} onChange={handleChange} placeholder="VOID Label" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="tailBoxLabel" value={formData.tailBoxLabel} onChange={handleChange} placeholder="Tail Box Label" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="cartonBoxLabel" value={formData.cartonBoxLabel} onChange={handleChange} placeholder="Carton Box Label" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="batteryCvr" value={formData.batteryCvr} onChange={handleChange} placeholder="Battery CVR" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="chargerKit" value={formData.chargerKit} onChange={handleChange} placeholder="Charger Kit" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="dataCable" value={formData.dataCable} onChange={handleChange} placeholder="Data Cable" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="cardPin" value={formData.cardPin} onChange={handleChange} placeholder="Card Pin" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="cardPinPaper" value={formData.cardPinPaper} onChange={handleChange} placeholder="Card Pin Paper" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="simCardPn" value={formData.simCardPn} onChange={handleChange} placeholder="SIM Card P/N" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="headset" value={formData.headset} onChange={handleChange} placeholder="Headset" className="w-full p-2 border rounded text-sm uppercase" />
-                      <input type="text" name="palletLabelCode" value={formData.palletLabelCode} onChange={handleChange} placeholder="Pallet Label Code" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="batCvrNumber" value={formData.batCvrNumber} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="xcvrNo" value={formData.xcvrNo} onChange={handleChange} placeholder="SA (PRISMA)" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="unitBoxNumber" value={formData.unitBoxNumber} onChange={handleChange} placeholder="PN de Caja Unitaria" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="trayNumber" value={formData.trayNumber} onChange={handleChange} placeholder="PN de Bandeja (Tray)" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="simToolInsert" value={formData.simToolInsert} onChange={handleChange} placeholder="PN de Inserto de Herramienta SIM" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="sleeveNumber" value={formData.sleeveNumber} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="overpackNumber" value={formData.overpackNumber} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="overpackInsertNumber" value={formData.overpackInsertNumber} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="manualNumber" value={formData.manualNumber} onChange={handleChange} placeholder="PN inserto contenido" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="batteryLabel" value={formData.batteryLabel} onChange={handleChange} placeholder="PN Etiqueta Bateria" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="masterTape" value={formData.masterTape} onChange={handleChange} placeholder="PN VOID MASTER" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="customerCling" value={formData.customerCling} onChange={handleChange} placeholder="Film de pantalla o pañal" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="resistFilm" value={formData.resistFilm} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="protectingSleeve" value={formData.protectingSleeve} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="sealingMachine" value={formData.sealingMachine} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="sealLabel" value={formData.sealLabel} onChange={handleChange} placeholder="N/A" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="unitBoxLabel" value={formData.unitBoxLabel} onChange={handleChange} placeholder="PN void Caja Unitaria" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="imeiLabelPn" value={formData.imeiLabelPn} onChange={handleChange} placeholder="PN Etiqueta IMEI" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="voidLabel" value={formData.voidLabel} onChange={handleChange} placeholder="PN Etiqueta VOID caja MASTER" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="tailBoxLabel" value={formData.tailBoxLabel} onChange={handleChange} placeholder="N/A " className="w-full p-2 border rounded text-sm uppercase" />
+                      {/* <input type="text" name="cartonBoxLabel" value={formData.cartonBoxLabel} onChange={handleChange} placeholder="PN Etiqueta Caja Master" className="w-full p-2 border rounded text-sm uppercase" /> */}
+                      <input type="text" name="batteryCvr" value={formData.batteryCvr} onChange={handleChange} placeholder="PN Tapa de Batería" className="w-full p-2 border rounded text-sm uppercase" />
+                      {/* <input type="text" name="chargerKit" value={formData.chargerKit} onChange={handleChange} placeholder="Kit de Cargador" className="w-full p-2 border rounded text-sm uppercase" /> */}
+                      <input type="text" name="dataCable" value={formData.dataCable} onChange={handleChange} placeholder="Cable de Datos" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="cardPin" value={formData.cardPin} onChange={handleChange} placeholder="N/a " className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="cardPinPaper" value={formData.cardPinPaper} onChange={handleChange} placeholder="N/a" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="simCardPn" value={formData.simCardPn} onChange={handleChange} placeholder="N/a" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="headset" value={formData.headset} onChange={handleChange} placeholder="N/a" className="w-full p-2 border rounded text-sm uppercase" />
+                      <input type="text" name="palletLabelCode" value={formData.palletLabelCode} onChange={handleChange} placeholder="PASS or FAIL" className="w-full p-2 border rounded text-sm uppercase" />
                     </div>
                   </div>
 
