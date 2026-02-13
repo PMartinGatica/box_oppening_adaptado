@@ -886,10 +886,10 @@ export default function App() {
 
                     <div className="bg-[#5B9BD5] text-white font-bold text-center p-2 border-x border-b border-black text-sm mt-2 flex items-center justify-center min-h-[2rem]">En la siguiente área requieren que los ingenieros los completen.</div>
                     <table className="w-full border-collapse border border-black text-sm">
-                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-2 w-1/3 text-center align-middle">Items</th><th className="border border-black p-2 w-1/3 text-center align-middle">Contenido</th><th className="border border-black p-2 w-1/3 text-center align-middle">Datos</th></tr></thead>
+                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-2 w-1/2 text-center align-middle">Items</th><th className="border border-black p-2 w-1/2 text-center align-middle">Contenido</th></tr></thead>
                       <tbody className="text-center">
                         {[
-                          { label: 'CFC TOP Engineer:', val: formData.cfcTopEngineer, hasInput: true },
+                          { label: 'CFC TOP Engineer:', val: formData.cfcTopEngineer },
                           { label: 'Ship market:', val: formData.shipMarket },
                           { label: 'XCVR No.:', val: formData.xcvrNo },
                           { label: 'S/M - Sales Model:', val: formData.salesModel },
@@ -913,7 +913,6 @@ export default function App() {
                           <tr key={idx} className="bg-white">
                             <td className="border border-black p-3 font-medium text-center align-middle pr-4 whitespace-nowrap">{row.label}</td>
                             <td className="border border-black p-3 text-center align-middle font-bold text-slate-700">{row.val}</td>
-                            <td className="border border-black p-3 relative align-middle">{row.hasInput && <div className="w-full h-8 border-2 border-green-600 rounded-sm mx-auto"></div>}</td>
                           </tr>
                         ))}
                       </tbody>
