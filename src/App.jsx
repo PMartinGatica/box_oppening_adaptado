@@ -920,7 +920,7 @@ export default function App() {
 
                     <div className="bg-[#5B9BD5] text-white font-bold text-center p-2 border-x border-b border-black text-sm mt-0 flex items-center justify-center min-h-[2rem]">En la siguiente área requieren que el personal de QA lo completen.</div>
                     <table className="w-full border-collapse border border-black text-sm">
-                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-2 w-1/3 text-center align-middle">Items</th><th className="border border-black p-2 w-1/3 text-center align-middle">Contenido</th><th className="border border-black p-2 w-1/3 text-center align-middle">Datos</th></tr></thead>
+                      <thead><tr className="bg-[#DEEBF7]"><th className="border border-black p-2 w-1/2 text-center align-middle">Items</th><th className="border border-black p-2 w-1/2 text-center align-middle">Datos</th></tr></thead>
                       <tbody className="text-center">
                         {[
                           { label: 'CFC CQA:', val: formData.cfcTopEngineer },
@@ -950,7 +950,6 @@ export default function App() {
                         ].map((row, idx) => (
                           <tr key={`qa-${idx}`} className="bg-white">
                             <td className="border border-black p-3 font-medium text-center align-middle pr-4 whitespace-nowrap">{row.label}</td>
-                            <td className="border border-black p-3 text-center align-middle font-bold text-slate-700"></td>
                             <td className="border border-black p-3 font-bold text-slate-800 text-center align-middle">{row.val}</td>
                           </tr>
                         ))}
